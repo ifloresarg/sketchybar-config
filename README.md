@@ -46,7 +46,7 @@ brew install font-sketchybar-app-font font-meslo-lg-nerd-font  font-sf-pro
 2. **Clone or copy this configuration:**
 
    ```bash
-   cp -r /path/to/this/config ~/.config/sketchybar
+   git clone https://github.com/ripple0328/sketchybar-config.git ~/.config/sketchybar
    ```
 
 3. **Start SketchyBar:**
