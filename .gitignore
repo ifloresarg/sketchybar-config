@@ -40,3 +40,4 @@ themes/.current-theme-backup
 # Backup files
 *.bak
 *.backup
+themes/.current-theme

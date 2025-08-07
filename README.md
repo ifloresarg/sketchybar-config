@@ -31,6 +31,9 @@ A SketchyBar configuration with Aerospace integration, theming support, and modu
 - [Aerospace](https://github.com/i3/i3) - Tiling window manager (for workspace features)
 - [GitHub CLI](https://cli.github.com/) (optional, for GitHub notifications)
 - [Nerd Font](https://www.nerdfonts.com/) - For icons (MesloLGS recommended)
+```
+brew install font-sketchybar-app-font font-meslo-lg-nerd-font  font-sf-pro
+```
 
 ## 🚀 Quick Start
 
