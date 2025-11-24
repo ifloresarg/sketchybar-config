@@ -1,59 +1,60 @@
 #!/usr/bin/env sh
 
-# Tokyo Night Theme - Semantic Version
-# Industry-standard semantic naming with Tokyo Night color values
+# Tokyo Night Storm Theme - Semantic Version
+# Industry-standard semantic naming with Tokyo Night Storm color values
+# Based on Tokyo Night Storm palette from Zed editor
 
 #===============================================================================
 # SURFACE COLORS (backgrounds, cards, overlays)
 #===============================================================================
 
-export SURFACE_BASE=0xff1a1b26            # Main app background (Tokyo Night bg)
-export SURFACE_CONTAINER_PRIMARY=0x9024283b    # Primary section backgrounds (Tokyo Night bg_dark)
-export SURFACE_CONTAINER_SECONDARY=0x90414868  # Secondary section backgrounds (Tokyo Night bg_highlight)
-export SURFACE_OVERLAY=0xff16161e         # Modal/popup backgrounds (Tokyo Night bg_darker)
-export SURFACE_ELEVATED=0xff24283b        # Raised card backgrounds (Tokyo Night bg_dark)
+export SURFACE_BASE=0xff24283b            # Main app background (Storm bg)
+export SURFACE_CONTAINER_PRIMARY=0x901f2335    # Primary section backgrounds (Storm bg_dark)
+export SURFACE_CONTAINER_SECONDARY=0x90292e42  # Secondary section backgrounds (Storm bg_highlight)
+export SURFACE_OVERLAY=0xff1f2335         # Modal/popup backgrounds (Storm bg_dark)
+export SURFACE_ELEVATED=0xff292e42        # Raised card backgrounds (Storm bg_highlight)
 
 #===============================================================================
 # CONTENT COLORS (text, icons)
 #===============================================================================
 
-export CONTENT_PRIMARY=0xffc0caf5         # Main content text and icons (Tokyo Night fg)
-export CONTENT_SECONDARY=0xffa9b1d6       # Supporting content (Tokyo Night fg_dark)
-export CONTENT_TERTIARY=0xff565f89        # Subtle/disabled content (Tokyo Night comment)
-export CONTENT_INVERSE=0xff1a1b26         # Content on colored backgrounds (Tokyo Night bg)
-export CONTENT_DISABLED=0xff565f89        # Disabled content state (Tokyo Night comment)
+export CONTENT_PRIMARY=0xffc0caf5         # Main content text and icons (Storm fg)
+export CONTENT_SECONDARY=0xffa9b1d6       # Supporting content (Storm fg_dark)
+export CONTENT_TERTIARY=0xff565f89        # Subtle/disabled content (Storm comment)
+export CONTENT_INVERSE=0xff24283b         # Content on colored backgrounds (Storm bg)
+export CONTENT_DISABLED=0xff565f89        # Disabled content state (Storm comment)
 
 #===============================================================================
 # INTERACTIVE COLORS (buttons, links, controls)
 #===============================================================================
 
-export INTERACTIVE_PRIMARY=0xff7aa2f7     # Primary brand actions and focus (Tokyo Night blue)
-export INTERACTIVE_SECONDARY=0xffbb9af7   # Secondary actions (Tokyo Night purple)
-export INTERACTIVE_SELECTED=0xffc0caf5    # Selected/active items (Tokyo Night fg)
+export INTERACTIVE_PRIMARY=0xff7aa2f7     # Primary brand actions and focus (Storm blue)
+export INTERACTIVE_SECONDARY=0xffbb9af7   # Secondary actions (Storm purple)
+export INTERACTIVE_SELECTED=0xffc0caf5    # Selected/active items (Storm fg)
 
-export INTERACTIVE_HOVER=0x60c0caf5       # Hover states (Tokyo Night fg with transparency)
-export INTERACTIVE_ACTIVE=0x807aa2f7      # Pressed states (Tokyo Night blue with transparency)
-export INTERACTIVE_DISABLED=0x40565f89    # Disabled states (Tokyo Night comment)
-export INTERACTIVE_FOCUS=0xff7aa2f7       # Focus outlines (Tokyo Night blue)
+export INTERACTIVE_HOVER=0x60c0caf5       # Hover states (Storm fg with transparency)
+export INTERACTIVE_ACTIVE=0x807aa2f7      # Pressed states (Storm blue with transparency)
+export INTERACTIVE_DISABLED=0x40565f89    # Disabled states (Storm comment)
+export INTERACTIVE_FOCUS=0xff7aa2f7       # Focus outlines (Storm blue)
 
 #===============================================================================
 # STATE COLORS (alerts, status, semantic states)
 #===============================================================================
 
-export STATE_SUCCESS=0xff9ece6a          # Success states (Tokyo Night green)
-export STATE_WARNING=0xffe0af68          # Warning states (Tokyo Night yellow)
-export STATE_CAUTION=0xffe0af68          # Medium warning level (Tokyo Night yellow)
-export STATE_ERROR=0xfff7768e            # Error states (Tokyo Night red)
-export STATE_INFO=0xff7dcfff             # Informational states (Tokyo Night cyan)
+export STATE_SUCCESS=0xff9ece6a          # Success states (Storm green)
+export STATE_WARNING=0xffe0af68          # Warning states (Storm yellow)
+export STATE_CAUTION=0xffff9e64          # Medium warning level (Storm orange)
+export STATE_ERROR=0xfff7768e            # Error states (Storm red)
+export STATE_INFO=0xff7dcfff             # Informational states (Storm cyan)
 
 #===============================================================================
 # BORDER COLORS (dividers, outlines)
 #===============================================================================
 
-export BORDER_PRIMARY=0xff565f89          # Main borders (Tokyo Night comment)
-export BORDER_SECONDARY=0xff3b4261        # Subtle borders (Tokyo Night border)
-export BORDER_FOCUS=0xff7aa2f7            # Focus outlines (Tokyo Night blue)
-export BORDER_DIVIDER=0xff414868          # Section separators (Tokyo Night bg_highlight)
+export BORDER_PRIMARY=0xff565f89          # Main borders (Storm comment)
+export BORDER_SECONDARY=0xff3b4261        # Subtle borders (Storm border)
+export BORDER_FOCUS=0xff7aa2f7            # Focus outlines (Storm blue)
+export BORDER_DIVIDER=0xff292e42          # Section separators (Storm bg_highlight)
 
 #===============================================================================
 # SPECIALIZED SYSTEM COLORS
@@ -79,7 +80,7 @@ export FONT_FAMILY_ICONS="sketchybar-app-font"         # App icon font with liga
 export FONT_FAMILY_SYSTEM="SF Pro"                     # System font for special cases
 
 export FONT_SIZE_SMALL=11                              # Small text
-export FONT_SIZE_MEDIUM=13                             # Regular text  
+export FONT_SIZE_MEDIUM=13                             # Regular text
 export FONT_SIZE_LARGE=16                              # Large text/icons
 
 # Main font variable used in sketchybar config
@@ -93,3 +94,31 @@ export FONT="$FONT_FAMILY_PRIMARY"                     # Default font for sketch
 export TRANSPARENT=0x00000000            # Transparent background for main bar
 export POPUP_BACKGROUND_COLOR=$SURFACE_OVERLAY
 export POPUP_SHADOW_COLOR=0x60000000
+
+#===============================================================================
+# TOKYO NIGHT STORM - DIRECT COLOR EXPORTS
+# (for backward compatibility with existing configs)
+#===============================================================================
+
+export TN_BG=0xff24283b        # Main background
+export TN_BG_DARK=0xff1f2335   # Darker background
+export TN_BG_LIGHT=0xff292e42  # Lighter background
+
+export TN_FG=0xffc0caf5        # Main foreground
+export TN_FG_DIM=0xff565f89    # Dimmed foreground
+
+export TN_BLUE=0xff7aa2f7
+export TN_CYAN=0xff7dcfff
+export TN_GREEN=0xff9ece6a
+export TN_YELLOW=0xffe0af68
+export TN_MAGENTA=0xffbb9af7
+export TN_RED=0xfff7768e
+export TN_ORANGE=0xffff9e64
+
+# Convenient aliases for bar
+export BAR_BG=$TN_BG_DARK
+export BAR_FG=$TN_FG
+export ACCENT=$TN_BLUE
+export WARN=$TN_ORANGE
+export ERROR=$TN_RED
+export INFO=$TN_CYAN

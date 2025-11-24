@@ -1,40 +1,149 @@
-#!/usr/bin/env bash
+#!/bin/bash
 
-# SketchyBar Main Configuration
-# This is the entry point for the SketchyBar configuration
-# 
-# See README.md for organizational principles and structure documentation
+# SketchyBar Configuration with Tokyo Night Storm Theme
+# Direct color definitions for reliability
 
-# Load Core Configuration
-source "$HOME/.config/sketchybar/config/globals.sh"
-source "$HOME/.config/sketchybar/config/bar.sh"
-source "$HOME/.config/sketchybar/config/defaults.sh"
-source "$HOME/.config/sketchybar/config/events.sh"
+# Tokyo Night Storm Color Palette
+export TN_BG=0xff24283b        # Main background
+export TN_BG_DARK=0xff1f2335   # Darker background
+export TN_BG_LIGHT=0xff292e42  # Lighter background
 
-# Load Items (define what appears on the bar)
-source "$ITEM_DIR/app/apple.sh"
-source "$ITEM_DIR/workspace/workspaces.sh"
-source "$ITEM_DIR/spacers.sh"
-source "$ITEM_DIR/app/app_info.sh"
-source "$ITEM_DIR/system/system_monitor.sh"
-source "$ITEM_DIR/right_spacer.sh"
-source "$ITEM_DIR/system/system_status.sh"
-source "$ITEM_DIR/workspace/aerospace_mode.sh"
-source "$ITEM_DIR/system/github.sh"
+export TN_FG=0xffc0caf5        # Main foreground
+export TN_FG_DIM=0xff565f89    # Dimmed foreground
 
-# Load Segments (group items visually)
-source "$SEGMENT_DIR/left/apple_workspace.sh"
-source "$SEGMENT_DIR/left/app_info.sh"
-source "$SEGMENT_DIR/center/aerospace_mode.sh"
-source "$SEGMENT_DIR/right/system_monitor.sh"
-source "$SEGMENT_DIR/right/system_status.sh"
+export TN_BLUE=0xff7aa2f7
+export TN_CYAN=0xff7dcfff
+export TN_GREEN=0xff9ece6a
+export TN_YELLOW=0xffe0af68
+export TN_MAGENTA=0xffbb9af7
+export TN_RED=0xfff7768e
+export TN_ORANGE=0xffff9e64
 
-# Finalize Configuration
+# Semantic color aliases
+export SURFACE_BG=0x901f2335           # Semi-transparent dark background
+export SURFACE_ELEVATED=0xff292e42    # Elevated elements
+export BORDER_COLOR=0xff3b4261         # Border color
+export BORDER_FOCUS=0xff7aa2f7         # Focused border
+
+PLUGIN_DIR="$CONFIG_DIR/plugins"
+
+##### Bar Appearance #####
+sketchybar --bar \
+    position=top \
+    height=40 \
+    blur_radius=30 \
+    color=$SURFACE_BG
+
+##### Changing Defaults #####
+default=(
+    background.color=$SURFACE_ELEVATED
+    background.border_color=$BORDER_COLOR
+    background.border_width=0
+    background.corner_radius=5
+    background.height=26
+    padding_left=6
+    padding_right=5
+    icon.font="GeistMono Nerd Font Mono:Bold:15.0"
+    label.font="GeistMono Nerd Font Mono:Regular:13.0"
+    icon.color=$TN_FG
+    label.color=$TN_FG
+    icon.padding_left=4
+    icon.padding_right=4
+    label.padding_left=4
+    label.padding_right=4
+)
+sketchybar --default "${default[@]}"
+
+##### Adding Mission Control Space Indicators #####
+SPACE_ICONS=("1" "2" "3" "4" "5" "6" "7" "8" "9" "10")
+for i in "${!SPACE_ICONS[@]}"
+do
+    sid="$(($i+1))"
+    space=(
+        space="$sid"
+        icon="${SPACE_ICONS[i]}"
+        icon.padding_left=7
+        icon.padding_right=7
+        icon.color=$TN_FG
+        background.color=$SURFACE_ELEVATED
+        background.border_color=$BORDER_COLOR
+        background.border_width=1
+        background.corner_radius=5
+        background.height=25
+        label.drawing=off
+        script="$PLUGIN_DIR/space.sh"
+        click_script="yabai -m space --focus $sid"
+    )
+    sketchybar --add space space."$sid" left --set space."$sid" "${space[@]}"
+done
+
+##### Adding Left Items #####
+sketchybar --add item chevron left \
+           --set chevron \
+                icon= \
+                icon.color=$TN_BLUE \
+                label.drawing=off \
+                background.drawing=off
+
+sketchybar --add item front_app left \
+           --set front_app \
+                icon.drawing=off \
+                icon.color=$TN_FG \
+                label.color=$TN_FG \
+                background.color=$SURFACE_ELEVATED \
+                script="$PLUGIN_DIR/front_app.sh" \
+           --subscribe front_app front_app_switched
+
+##### Adding Right Items #####
+
+# Clock with blue accent
+sketchybar --add item clock right \
+           --set clock \
+                update_freq=10 \
+                icon= \
+                icon.color=$TN_BLUE \
+                label.color=$TN_FG \
+                background.color=$SURFACE_ELEVATED \
+                script="$PLUGIN_DIR/clock.sh"
+
+# Volume with cyan accent
+sketchybar --add item volume right \
+           --set volume \
+                icon.color=$TN_CYAN \
+                label.color=$TN_FG \
+                background.color=$SURFACE_ELEVATED \
+                script="$PLUGIN_DIR/volume.sh" \
+           --subscribe volume volume_change
+
+# Battery with green accent
+sketchybar --add item battery right \
+           --set battery \
+                update_freq=120 \
+                icon.color=$TN_GREEN \
+                label.color=$TN_FG \
+                background.color=$SURFACE_ELEVATED \
+                script="$PLUGIN_DIR/battery.sh" \
+           --subscribe battery system_woke power_source_change
+
+# CPU with dynamic color based on usage
+sketchybar --add item cpu right \
+           --set cpu \
+                update_freq=5 \
+                icon= \
+                icon.color=$TN_MAGENTA \
+                label.color=$TN_FG \
+                background.color=$SURFACE_ELEVATED \
+                script="$PLUGIN_DIR/cpu.sh"
+
+# Memory with dynamic color based on usage
+sketchybar --add item memory right \
+           --set memory \
+                update_freq=10 \
+                icon= \
+                icon.color=$TN_GREEN \
+                label.color=$TN_FG \
+                background.color=$SURFACE_ELEVATED \
+                script="$PLUGIN_DIR/system/memory.sh"
+
+##### Force all scripts to run the first time #####
 sketchybar --update
-
-# Initialize Dynamic Content
-sketchybar --trigger aerospace_mode_change
-
-# Initialize current workspace highlighting
-CURRENT_WORKSPACE=$(aerospace list-workspaces --focused)
-sketchybar --trigger aerospace_workspace_change FOCUSED_WORKSPACE=$CURRENT_WORKSPACE
